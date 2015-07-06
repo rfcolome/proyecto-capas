@@ -8,7 +8,13 @@ public class Login extends ActionSupport {
     @Override
     public String execute() throws Exception {
     	System.out.println("el usuario es " + usuario + "y el password es " + password	);
-        return SUCCESS;
+    	if (usuario.equalsIgnoreCase("colo")) {
+    		return SUCCESS;
+    	}
+    	else {
+    		return INPUT;
+    	}
+        //return SUCCESS;
     }
 
     @SkipValidation

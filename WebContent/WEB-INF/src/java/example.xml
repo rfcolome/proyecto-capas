@@ -11,7 +11,7 @@
             <result>/WEB-INF/jsp/example/HelloWorld.jsp</result>
         </action>
 
-        <action name="Login_*" method="{1}" class="example.Login">
+        <action name="Login" class="example.Login">
             <result name="input">/WEB-INF/jsp/example/Login.jsp</result>
             <result type="redirectAction">Menu</result>
         </action>
@@ -21,5 +21,8 @@
         </action>
 
         <!-- Add actions here -->
+        <action name="test" class="example.Test">
+			<result>/WEB-INF/jsps/Test.jsp</result>
+		</action>
     </package>
 </struts>
