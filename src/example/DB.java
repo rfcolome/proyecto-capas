@@ -6,31 +6,47 @@ import java.util.*;
 public class DB {
 	
 	public static void main(String[] argv) {
-		if (tryConnection()) {
-			System.out.println("success!!");
-		}
-		else {
-			System.out.println("failure :C");
+		ArrayList<Usuario> usuarios = buscarUsuarios();
+		for (int i = 0; i < usuarios.size(); i++) {
+			System.out.println(usuarios.get(i).getNombre() + " " + usuarios.get(i).getApellido());
 		}
 	}
 	
-	public static boolean tryConnection() {
-		boolean success = false;
+	public static Connection connect() {
+		Connection connection = null;
 		try {
 			Class.forName("org.postgresql.Driver");
-			Connection connection = null;
 			connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/proyectocapas","colo", "colo");
-			PreparedStatement statement = connection.prepareStatement("SELECT * FROM usuario");
-			ResultSet resultado = statement.executeQuery();
-			//resultado.first();
-			resultado.next();
-			System.out.println(resultado.getString("nombre") + " " + resultado.getString("apellido"));
-			connection.close();
-			success = true;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
-		return success;
+		return connection;
+	}
+	
+	public static ArrayList<Usuario> buscarUsuarios() {
+		ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
+		try {
+			Connection connection = connect();
+			String sql = "" +
+					" SELECT *     " +
+					" FROM usuario ";
+			PreparedStatement statement = connection.prepareStatement(sql);
+			ResultSet resultado = statement.executeQuery();
+			while (resultado.next()) {
+				usuarios.add(
+						new Usuario(
+								resultado.getInt("id"), 
+								resultado.getString("nombre"), 
+								resultado.getString("apellido"),
+								resultado.getString("usuario"),
+								resultado.getString("password")));
+			}
+			connection.close();
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		return usuarios;
 	}
 }

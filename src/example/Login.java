@@ -1,14 +1,27 @@
 package example;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+
 import org.apache.struts2.interceptor.validation.SkipValidation;
+
 import com.opensymphony.xwork2.ActionSupport;
 
 public class Login extends ActionSupport {
 
     @Override
     public String execute() throws Exception {
-    	System.out.println("el usuario es " + usuario + "y el password es " + password	);
-    	if (usuario.equalsIgnoreCase("colo")) {
+    	ArrayList<Usuario> usuarios = DB.buscarUsuarios();
+    	boolean encontrado = false;
+    	Iterator iterator = usuarios.iterator();
+    	while (iterator.hasNext()) {
+    		Usuario usr = (Usuario) iterator.next();
+    		if (usr.esUsuarioCorrecto(usuario, password)) {
+    			encontrado = true;
+    			break;
+    		}
+    	}
+    	if (encontrado) {
     		return SUCCESS;
     	}
     	else {
