@@ -7,7 +7,7 @@ public class Login extends ActionSupport {
 
     @Override
     public String execute() throws Exception {
-    	System.out.println("el usuario es " + usuario + "y el password es " + password	);
+    	System.out.println("el usuario es " + usuario + " y el password es " + password	);
         return SUCCESS;
     }
 

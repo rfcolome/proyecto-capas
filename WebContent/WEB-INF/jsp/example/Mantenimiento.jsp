@@ -9,7 +9,12 @@
 
 	<body>
 		<s:form action="Mantenimiento">
-    		<s:submit value="continuar"/>
+    		<s:textfield key="nombre"/>
+    		<s:textfield key="apellido" />
+    		<s:textfield key="usuario" />
+    		<s:textfield key="password" />
+    		
+    		<s:submit value="guardar"/>
 		</s:form>		
 	</body>
 </html>

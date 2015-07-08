@@ -11,9 +11,15 @@
             <result>/WEB-INF/jsp/example/HelloWorld.jsp</result>
         </action>
 
+		<!--  login es la accion con la cual el usuario se loguea -->
         <action name="Login" class="example.Login">
             <result name="input">/WEB-INF/jsp/example/Login.jsp</result>
-            <result type="redirectAction">Menu</result>
+            <result type="redirectAction">Mantenimiento</result> <!-- si el tipo es success, se redirecciona a mantenimiento -->
+        </action>
+        
+        <action name="Mantenimiento" class="example.Mantenimiento">
+        	<result name="error">/WEB-INF/jsp/example/Mantenimiento.jsp</result>
+            <result type="redirectAction">Login</result>
         </action>
 
         <action name="*" class="example.ExampleSupport">

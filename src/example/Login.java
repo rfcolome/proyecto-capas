@@ -11,7 +11,7 @@ public class Login extends ActionSupport {
 
     @Override
     public String execute() throws Exception {
-    	ArrayList<Usuario> usuarios = DB.buscarUsuarios();
+    	ArrayList<Usuario> usuarios = Usuario.buscarUsuarios();
     	boolean encontrado = false;
     	Iterator iterator = usuarios.iterator();
     	while (iterator.hasNext()) {
